@@ -1,8 +1,8 @@
 # youtube_downloader
 There is an app to download videos from youtube.
 Available commands: 
+
     /changefolder(downloads in project folder by default)
-    
     /login if u want to download age-restricted content
     /converttompr3
     /exit
