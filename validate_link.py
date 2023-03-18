@@ -12,7 +12,7 @@ def retrieve_video_info(url, login=''):
         ydl_opts['cookiefile'] = 'cook_rdy.txt'
     info = youtube_dl.YoutubeDL(ydl_opts).extract_info(url, download=False)
     if info.get('_type') == 'playlist':
-        return info.get('entries')
+        return [entry for entry in info.get('entries') if entry is not None]
     return [info]
 
 
