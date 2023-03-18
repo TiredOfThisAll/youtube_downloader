@@ -18,7 +18,7 @@ class Repository:
         """, (name, url))
 
     def get_list_of_downloaded_music(self):
-        return list(map(lambda x: x[0], self.cursor.execute("""
+        return list(map(lambda x: x[1], self.cursor.execute("""
             SELECT id, name
             FROM downloaded_music
             ORDER BY id
