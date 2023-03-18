@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-import youtube_dl
+import yt_dlp as youtube_dl
 import sqlite3
 from os import path
 
@@ -49,7 +49,7 @@ print("""There is an app to download music from youtube.
     Available commands: /exit
     /changefolder(downloads in project folder by default)
     /login if u want to download age-restricted content
-    /converttompr3""")
+    /converttomp3""")
 
 try:
     while True:
