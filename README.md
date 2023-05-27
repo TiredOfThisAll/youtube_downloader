@@ -5,11 +5,11 @@ Available commands:
 
     /changefolder(downloads in project folder by default)
     /login if u want to download age-restricted content
-    /converttomp3
+    /convert
     /exit
     
 Requirements:
-1. youtube_dl package
+1. yt_dlp package
 2. If you want to convert downloaded videos to mp3 you have to download FFmpeg
 
 Youtube authorization guide:
