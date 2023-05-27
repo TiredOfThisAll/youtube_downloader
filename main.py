@@ -49,7 +49,7 @@ print("""There is an app to download music from youtube.
     Available commands: /exit
     /changefolder(downloads in project folder by default)
     /login if u want to download age-restricted content
-    /converttomp3""")
+    /convert if u want to convert video to mp3""")
 
 try:
     while True:
@@ -64,12 +64,13 @@ try:
             cook_redy('my_cookie.txt')
             ydl_opts['cookiefile'] = 'cook_rdy.txt'
             continue
-        elif url.startswith('/converttomp3'):
+        elif url.startswith('/convert'):
             ydl_opts['postprocessors'] = [{
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'mp3',
                 'preferredquality': '320',
             }]
+            continue
         error = check_valid_link_youtube(url, logger, repository)
         if error == 'Invalid link or video unavailable':
             print(error + ' URL: ' + url)
@@ -86,15 +87,15 @@ try:
 
         video_info = error
 
-        for i in range(len(video_info)):
+        for song in video_info:
             if SAVE_PATH:
-                ydl_opts['outtmpl'] = path.join(SAVE_PATH, video_info[i]['title'] + '.mp3')
+                ydl_opts['outtmpl'] = path.join(SAVE_PATH, song['title'] + '.mp3')
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-                ydl.download([video_info[i]['webpage_url']])
+                ydl.download([song['url']])
 
         if FINISHED:
-            for i in range(len(video_info)):
-                repository.insert_downloaded_music(video_info[i]['title'], video_info[i]['webpage_url'])
+            for song in video_info:
+                repository.insert_downloaded_music(song['title'], song['url'])
                 repository.commit()
             FINISHED = False
 except Exception as e:

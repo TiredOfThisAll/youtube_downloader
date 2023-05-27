@@ -3,7 +3,8 @@ import yt_dlp as youtube_dl
 
 ydl_opts = {
     'quiet': True,
-    'ignoreerrors': True
+    'ignoreerrors': True,
+    'extract_flat': True,
 }
 
 
@@ -23,7 +24,7 @@ def check_valid_link_youtube(url, logger, repository, login=''):
 
         video_info = retrieve_video_info(url, login)
         for i in range(len(video_info)):
-            if video_info[i]['title'] not in already_downloaded_songs:
+            if video_info[i]['title'] not in already_downloaded_songs and video_info[i]['title'] != '[Deleted video]' and video_info[i]['title'] != '[Private video]':
                 new_songs.append(video_info[i])
         if new_songs:
             print(f'Found {len(new_songs)} new songs to download')
